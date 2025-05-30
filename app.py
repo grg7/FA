@@ -42,13 +42,3 @@ keyword_filter = st.text_input("Filter by Keyword")
 @st.cache_data(ttl=600)
 def get_news(urls):
     return fetch_news(urls)
-
-if st.button("Fetch News"):
-    with st.spinner("Fetching news..."):
-        news = get_news(rss_feeds)
-        filtered = filter_news(news, keyword_filter)
-        if filtered:
-            df = pd.DataFrame(filtered)
-            st.dataframe(df)
-        else:
-            st.write("No news found matching your criteria.")
